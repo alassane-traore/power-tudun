@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body id="body"  >
+  <div id="discussdiv" >
+<ul id="discussul" >
+  <p> Vos impressions  sur TÚDÙN ?  </p>
+  <p> que voulez vous comprendre sur TÚDÙN ?  </p>
+  <p> Quelles sont vos difficultés avec TÚDùn?  </p>
+  <p> Quelles ameliorations pourraient changer votre experiance avec TÚDÙN ?  </p>
+  <p> Quelles difficultés de votre contidien aimeriez voir resolues par une application ?  </p>
+  <span id="postspan" >
+
+  </span>
+ <!-- <li id="discussline"  >
+
+  </li>-->
+  <textarea name="oneComment" id="oneComment" cols="30" rows="5"  >
+  
+  </textarea>
+  <button id="post" type="submit"> POST</button>
+
+</ul>
+
+  </div>
+  <img id="img" src="" alt="doggy"> 
+  <br>
+  <ul id="doggysays"> 
+
+     </ul> 
+     <span id="client" >
+
+    </span>
+  <br>
+  <form id="forInput" method="post" > 
+    <label id="nom" for="Nom">Nom</label>
+     <input  id="rsp" type="text" placeholder="Prenom Nom !"; accept="string" minlength="5">
+    <input accept="string" id="submit" type="submit" value="los!"> 
+   </form>
+   <form  id="comment" action="post">
+    <label id="com" for="comment"> Fonctionalité </label>
+    <input id="func" type="text" placeholder= 'une fonctionalité !' > 
+    <input id="subfunc" type="submit" value="+">  <br>
+    <button id="livebutton"  type="submit" >
+ Idées ! 
+    </button>
+   </form>
+   
+
+ 
+  
+
+  <div id="forbut"> <button  id="btn"> Clique moi! </button> </div>
+
+    <script src="app.js"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
+  <!--  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script> -->
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-librarie
+
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+apiKey: "AIzaSyB6ZrOWv_Yj2xLH0Ig5gxJTa-2K6rkjMhA",
+authDomain: "tudun-22f89.firebaseapp.com",
+databaseURL: "https://tudun-22f89-default-rtdb.firebaseio.com",
+projectId: "tudun-22f89",
+storageBucket: "tudun-22f89.appspot.com",
+messagingSenderId: "911979516780",
+appId: "1:911979516780:web:4a8d359c3c80d99cedd949",
+measurementId: "G-NEDRJ6GLLM"
+};
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+import{getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField , where, query,getDocs
+}
+from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"
+
+ 
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore();
+  const button = document.getElementById('btn');
+const doggy = document.getElementById('img')
+const buttonFather = document.getElementById('forbut');
+const doggywords = document.getElementById('doggysays');
+const inputForm = document.getElementById('forInput')
+const input = document.getElementById('rsp')
+const submition = document.getElementById('submit');
+
+const commentLabel = document.getElementById('com')
+const comment = document.getElementById('func');
+const submitComment = document.getElementById('subfunc');
+const commentForm = document.getElementById('comment');
+const dat = document.getElementById('dat');
+
+
+submitComment.addEventListener('click', async function addDocument_AutoID(){
+var ref=collection(db,`${input.value}`);
+const docRef = await addDoc(
+  ref,{
+   
+    Needs : document.getElementById('client').innerText
+  }
+  )
+ 
+  .catch((error)=>{
+    alert('not successfull'+ error)
+  })
+submition.addEventListener('click',
+  async function getdocument(){
+    var ref = doc(db, 'IdrissaNASSA',`${input.value}`);
+    const mydoc = await getDoc(ref);
+    if(mydoc.exists()){
+     document.getElementById('client').innerText = mydoc.data().Needs 
+     .then(()=>{
+      alert('operation successfull!')
+     })
+    }else{
+      alert('no such document')
+    }
+  })
+
+})
+
+
+// live
+const post = document.getElementById("post");
+const liveButton = document.getElementById('livebutton');
+const discussDiv = document.getElementById('discussdiv');
+const discussUl = document.getElementById('discussul');
+const textArea = document.getElementById('oneComment');
+
+liveButton.addEventListener('click',async function (e){
+ e.preventDefault()
+  discussDiv.style.visibility = 'visible';
+  doggy.style.visibility = 'hidden';
+  commentForm.style.visibility = 'hidden';
+  doggywords.style.visibility = 'hidden';
+//var ref = doc(db,  )
+  //const q = query(collection(db, "comment", doc.id ), where("newcomments", "==",true));
+//const querySnapshot = await getDocs (q);
+//querySnapshot.forEach((doc) => {
+  //e.preventDefault()
+  // doc.data() is never undefined for query doc snapshots
+  //console.log(doc.id, " => ", doc.data());
+  const querySnapshot = await getDocs(collection(db, "comment"));
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+  let newline = document.createElement('li')
+document.getElementById('postspan').appendChild(newline);
+newline.innerText = `${doc.id} : ${doc.data().newcomments}`;
+//`${doc.id}`.style.color = 'gold';
+});
+
+
+});
+
+//})
+post.addEventListener('click',
+async function addPost (){
+let postline = document.createElement ('li');
+postline.id='postline';
+let postspan = document.getElementById('postspan')
+postspan.appendChild(postline);
+postline.innerHTML = textArea.value;
+textArea.value ='';
+var ref= doc (db, 'comment', `${input.value}`);
+const docRef = await setDoc(
+  ref,
+   
+    {newcomments: document.getElementById('postline').innerText},
+    { newcomments: true }, { merge: true }
+
+  
+  )
+ .then(() => {
+   alert('Seccessfull');
+ })
+  .catch((error)=>{
+    alert('not successfull'+ error)
+  })
+  
+
+})
+  
+
+
+
+
+ 
+</script>
+
+
+
+</body>
+
+
+
+</html>

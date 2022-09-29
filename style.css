@@ -1,0 +1,84 @@
+#btn{
+    background-color: transparent;
+    color: lawngreen;
+    border-radius: 59px;
+    border-width: 17px;
+    margin-top: 0%;
+    margin-left: 49%;
+    
+}
+
+#img {
+    width: 31%;
+    margin-left: 39%;
+    margin-top: -25%;
+}
+
+#body {
+    background-color: #4b647b;
+    width:105;
+    max-width:1920px;;
+    min-width: 480px;
+    height: 200px;
+    margin-left: -11px;
+    overflow:auto;
+    grid-auto-flow: column;
+}
+
+#tst {
+    color: aliceblue;
+}
+#doggysays {
+    margin-left: 37%;
+    color: aliceblue;
+}
+#rsp{
+    margin-left: 0%;
+    
+}
+
+#forInput {
+    visibility: hidden;
+}
+#comment {
+    visibility: hidden;
+    
+}
+
+#needs{
+    color:lawngreen; 
+    margin-left: 39%;
+}
+#nom {
+    color: gold;
+   margin-left: 39%; 
+}
+
+#com{
+    color: gold;
+    margin-left: 39%; 
+}
+
+#subfunc{
+    color: green;
+    background-color: gold;
+}
+
+#client{
+    margin-left: 37%;
+    color: blue;
+}
+#discussdiv{
+    visibility: hidden;
+}
+
+#livebutton{
+    background-color: transparent;
+    color: lawngreen;
+    border-radius: 59px;
+    border-width: 11px;
+    margin-left: 57%;
+}
+#postspan{
+    color: chartreuse;
+}
