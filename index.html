@@ -8,16 +8,19 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body id="body"  >
+  <ul>
   <div id="discussdiv" >
-<ul id="discussul" >
   <p> Vos impressions  sur TÚDÙN ?  </p>
   <p> que voulez vous comprendre sur TÚDÙN ?  </p>
   <p> Quelles sont vos difficultés avec TÚDùn?  </p>
   <p> Quelles ameliorations pourraient changer votre experiance avec TÚDÙN ?  </p>
   <p> Quelles difficultés de votre contidien aimeriez voir resolues par une application ?  </p>
-  <span id="postspan" >
+   <!-- 30Sept  -->
+  <div id="postspan" >
+   <!-- <ol id="postol">
+    </ol> -->
 
-  </span>
+  </div>
  <!-- <li id="discussline"  >
 
   </li>-->
@@ -26,9 +29,8 @@
   </textarea>
   <button id="post" type="submit"> POST</button>
 
-</ul>
-
   </div>
+</ul>
   <img id="img" src="" alt="doggy"> 
   <br>
   <ul id="doggysays"> 
@@ -46,17 +48,24 @@
    <form  id="comment" action="post">
     <label id="com" for="comment"> Fonctionalité </label>
     <input id="func" type="text" placeholder= 'une fonctionalité !' > 
-    <input id="subfunc" type="submit" value="+">  <br>
-    <button id="livebutton"  type="submit" >
+    <input id="subfunc" type="submit" value="ok">  
+    
+    <!--  30Sept<button id="livebutton"  type="submit" >
  Idées ! 
-    </button>
+    </button> -->
    </form>
    
 
  
-  
+  <!-- 30Sept  -->
 
-  <div id="forbut"> <button  id="btn"> Clique moi! </button> </div>
+  <div id="forbut"> 
+    <label id="tudun" for="tudun"> Túdùn :</label>
+     <button  id="btn"> Clique moi! </button> 
+    </div>
+  <label  id="chats" for="chats"> chats:</label>
+   <button id="livebutton"  type="submit" > Idées </button>  
+   <!-- 30Sept  -->
 
     <script src="app.js"></script>
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
@@ -121,19 +130,19 @@ const docRef = await addDoc(
   .catch((error)=>{
     alert('not successfull'+ error)
   })
-submition.addEventListener('click',
-  async function getdocument(){
-    var ref = doc(db, 'IdrissaNASSA',`${input.value}`);
-    const mydoc = await getDoc(ref);
-    if(mydoc.exists()){
-     document.getElementById('client').innerText = mydoc.data().Needs 
-     .then(()=>{
-      alert('operation successfull!')
-     })
-    }else{
-      alert('no such document')
-    }
-  })
+//submition.addEventListener('click',
+ // async function getdocument(){
+   // var ref = doc(db, 'IdrissaNASSA',`${input.value}`);
+   // const mydoc = await getDoc(ref);
+    //if(mydoc.exists()){
+     //document.getElementById('client').innerText = mydoc.data().Needs 
+     //.then(()=>{
+     // alert('operation successfull!')
+    // })
+    //}else{
+    //  alert('no such document')
+   // }
+  //})
 
 })
 
@@ -144,13 +153,30 @@ const liveButton = document.getElementById('livebutton');
 const discussDiv = document.getElementById('discussdiv');
 const discussUl = document.getElementById('discussul');
 const textArea = document.getElementById('oneComment');
+let postspan = document.getElementById('postspan')
+//})
+// 30Sept
 
-liveButton.addEventListener('click',async function (e){
- e.preventDefault()
-  discussDiv.style.visibility = 'visible';
+
+//const postOl = document.getElementById('postol')
+
+
+
+liveButton.addEventListener('click', function (){
+ //e.preventDefault()
+  
   doggy.style.visibility = 'hidden';
   commentForm.style.visibility = 'hidden';
+  inputForm.style.visibility = 'visible'
   doggywords.style.visibility = 'hidden';
+  submition.addEventListener('click', async function(e){
+  e.preventDefault();
+  if (input.value != ''){
+
+    inputForm.style.visibility = 'hidden';
+    commentForm.style.visibility = 'hidden';
+    discussDiv.style.visibility = 'visible';
+    doggywords.style.visibility = 'hidden'
 //var ref = doc(db,  )
   //const q = query(collection(db, "comment", doc.id ), where("newcomments", "==",true));
 //const querySnapshot = await getDocs (q);
@@ -162,43 +188,86 @@ liveButton.addEventListener('click',async function (e){
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
   console.log(doc.id, " => ", doc.data());
-  let newline = document.createElement('li')
-document.getElementById('postspan').appendChild(newline);
-newline.innerText = `${doc.id} : ${doc.data().newcomments}`;
-//`${doc.id}`.style.color = 'gold';
-});
-
-
-});
-
-//})
-post.addEventListener('click',
-async function addPost (){
+  //let newline = document.createElement('li')
+  //newline.id = 'line'
+//document.getElementById('postspan').appendChild(newline);
 let postline = document.createElement ('li');
 postline.id='postline';
 let postspan = document.getElementById('postspan')
 postspan.appendChild(postline);
-postline.innerHTML = textArea.value;
+//document.getElementById('postline')
+postline.innerHTML= ` ${doc.data().newcomments}`;
+//`${doc.id}`.style.color = 'gold';
+
+//return postspan.innerHTML ${doc.id} :
+
+})
+}});
+  
+
+});
+
+
+
+
+post.addEventListener('click',
+async function addPost (){
+//let postline = document.createElement ('li');
+//postline.id='postline';
+let newLine = document.createElement ('li');
+let postspan = document.getElementById('postspan')
+ 
+postspan.appendChild(newLine);
+//30sept
+//postline.innerHTML=
+newLine.innerHTML= `${input.value}: <br> ${textArea.value}`;
 textArea.value ='';
+
 var ref= doc (db, 'comment', `${input.value}`);
 const docRef = await setDoc(
   ref,
    
-    {newcomments: document.getElementById('postline').innerText},
+    {newcomments: newLine.innerHTML},//document.getElementById('postline').innerText},
     { newcomments: true }, { merge: true }
 
   
   )
  .then(() => {
-   alert('Seccessfull');
+   alert('vous avez poster un commentaire !');
  })
   .catch((error)=>{
     alert('not successfull'+ error)
   })
+
+  //postline.style.visibility = 'hidden';
+  
+  //postline.style.visibility = 'visible';
+  //textArea.value ='';
+
+  const querySnapshot = await getDocs(collection(db, "comment"));
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+ // let newline = document.createElement('li')
+//document.getElementById('postspan').appendChild(newline);
+let otherline = document.createElement ('li');
+//postline.id='postline';
+//let postspan =
+ document.getElementById('postspan').appendChild(otherline);
+//document.getElementById('postline')
+otherline.innerHTML= `${doc.data().newcomments}`;
+//`${doc.id}`.style.color = 'gold';
+//document.getElementById('postline').innerText
+otherline = postspan.lastChild
+return (newLine.innerText)
+}); 
+
+}
+
+)
+//${doc.id} :
   
 
-})
-  
 
 
 
