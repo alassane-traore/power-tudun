@@ -177,6 +177,11 @@ liveButton.addEventListener('click', function (){
     commentForm.style.visibility = 'hidden';
     discussDiv.style.visibility = 'visible';
     doggywords.style.visibility = 'hidden'
+      doggywords.innerHtml = '';
+      commentForm.innerHtml = '';
+      doggy.src = '';
+      doggy.innerHtml = '';
+      
 //var ref = doc(db,  )
   //const q = query(collection(db, "comment", doc.id ), where("newcomments", "==",true));
 //const querySnapshot = await getDocs (q);
