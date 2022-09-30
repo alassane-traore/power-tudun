@@ -186,4 +186,5 @@ input.addEventListener('input',function(e){
       newdoggywords.style.color = "red"
        input.value = '';
     }
-})
+})      
+
