@@ -14,6 +14,7 @@ const commentForm = document.getElementById('comment');
 
 
 button.addEventListener('click',function  (){
+     doggy.style.visibility = 'visible'
 doggy.src='./doogy/coder-dog.png';
 buttonFather.innerHTML = '';
 inputForm.style.visibility = 'visible'
